@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <unattend xmlns="urn:schemas-microsoft-com:unattend" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State">
-	<!--https://schneegans.de/windows/unattend-generator/?LanguageMode=Unattended&UILanguage=en-US&Locale=en-US&Keyboard=00000409&GeoLocation=244&ProcessorArchitecture=amd64&ComputerNameMode=Custom&ComputerName=trantor&CompactOsMode=Default&TimeZoneMode=Explicit&TimeZone=Central+Standard+Time&PartitionMode=Interactive&WindowsEditionMode=Unattended&WindowsEdition=pro&UserAccountMode=Interactive&PasswordExpirationMode=Unlimited&LockoutMode=Default&HideFiles=HiddenSystem&TaskbarSearch=Hide&ShowFileExtensions=true&DisableWidgets=true&DeleteTaskbarIcons=true&DisableAppSuggestions=true&HideEdgeFre=true&MakeEdgeUninstallable=true&WifiMode=Skip&ExpressSettings=DisableAll&KeysMode=Skip&ColorMode=Custom&SystemColorTheme=Dark&AppsColorTheme=Dark&AccentColorOnStart=true&AccentColorOnBorders=true&EnableTransparency=true&WallpaperMode=Default&RemoveBingSearch=true&RemoveCamera=true&RemoveClipchamp=true&RemoveCopilot=true&RemoveCortana=true&RemoveInternetExplorer=true&RemoveMailCalendar=true&RemoveNews=true&RemoveOffice365=true&RemoveOneDrive=true&RemoveOneNote=true&RemoveOutlook=true&RemoveRecall=true&RemoveSkype=true&RemoveSolitaire=true&RemoveStickyNotes=true&RemoveTeams=true&RemoveGetStarted=true&RemoveToDo=true&RemoveYourPhone=true&StartTilesMode=Empty&StartPinsMode=Empty&WdacMode=Skip-->
+	<!--https://schneegans.de/windows/unattend-generator/?LanguageMode=Unattended&UILanguage=en-US&Locale=en-US&Keyboard=00000409&GeoLocation=244&ProcessorArchitecture=amd64&ComputerNameMode=Custom&ComputerName=trantor&CompactOsMode=Default&TimeZoneMode=Explicit&TimeZone=Central+Standard+Time&PartitionMode=Interactive&WindowsEditionMode=Unattended&WindowsEdition=pro&UserAccountMode=Interactive&PasswordExpirationMode=Unlimited&LockoutMode=Default&HideFiles=HiddenSystem&TaskbarSearch=Hide&ShowFileExtensions=true&DisableWidgets=true&DeleteTaskbarIcons=true&DisableAppSuggestions=true&HideEdgeFre=true&MakeEdgeUninstallable=true&WifiMode=Skip&ExpressSettings=DisableAll&KeysMode=Skip&ColorMode=Default&WallpaperMode=Default&RemoveBingSearch=true&RemoveCamera=true&RemoveClipchamp=true&RemoveCopilot=true&RemoveCortana=true&RemoveInternetExplorer=true&RemoveMailCalendar=true&RemoveNews=true&RemoveOffice365=true&RemoveOneDrive=true&RemoveOneNote=true&RemoveOutlook=true&RemoveRecall=true&RemoveSkype=true&RemoveSolitaire=true&RemoveStickyNotes=true&RemoveTeams=true&RemoveGetStarted=true&RemoveToDo=true&RemoveYourPhone=true&StartTilesMode=Empty&StartPinsMode=Empty&SystemScript0=%23+Create+WinUtil+shortcut+on+the+desktop+%28sourced+from+CTT+MicroWin%29%0D%0A++%24desktopPath+%3D+%22C%3A%5CUsers%5CDefault%5CDesktop%22%0D%0A++%23+Specify+the+target+PowerShell+command%0D%0A++%24command+%3D+%22powershell.exe+-NoProfile+-ExecutionPolicy+Bypass+-Command+%27irm+https%3A%2F%2Fchristitus.com%2Fwin+%7C+iex%27%22%0D%0A++%23+Specify+the+path+for+the+shortcut%0D%0A++%24shortcutPath+%3D+Join-Path+%24desktopPath+%27LAUNCH-CTT-WINUTIL.lnk%27%0D%0A++%23+Create+a+shell+object%0D%0A++%24shell+%3D+New-Object+-ComObject+WScript.Shell%0D%0A++++++++%0D%0A++%23+Create+a+shortcut+object%0D%0A++%24shortcut+%3D+%24shell.CreateShortcut%28%24shortcutPath%29%0D%0A+++++++++++%0D%0A++%23+Set+properties+of+the+shortcut%0D%0A++%24shortcut.TargetPath+%3D+%22powershell.exe%22%0D%0A++%24shortcut.Arguments+%3D+%22-NoProfile+-ExecutionPolicy+Bypass+-Command+%60%22%24command%60%22%22%0D%0A++%23+Save+the+shortcut%0D%0A++%24shortcut.Save%28%29%0D%0A++++++++%0D%0A++%23+Make+the+shortcut+have+%27Run+as+administrator%27+property+on%0D%0A++%24bytes+%3D+%5BSystem.IO.File%5D%3A%3AReadAllBytes%28%24shortcutPath%29%0D%0A++%23+Set+byte+value+at+position+0x15+in+hex%2C+or+21+in+decimal%2C+from+the+value+0x00+to+0x20+in+hex%0D%0A++%24bytes%5B0x15%5D+%3D+%24bytes%5B0x15%5D+-bor+0x20%0D%0A++%5BSystem.IO.File%5D%3A%3AWriteAllBytes%28%24shortcutPath%2C+%24bytes%29&SystemScriptType0=Ps1&WdacMode=Skip-->
 	<settings pass="offlineServicing"></settings>
 	<settings pass="windowsPE">
 		<component name="Microsoft-Windows-International-Core-WinPE" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
@@ -227,19 +227,7 @@
 				</RunSynchronousCommand>
 				<RunSynchronousCommand wcm:action="add">
 					<Order>50</Order>
-					<Path>reg.exe load "HKU\DefaultUser" "C:\Users\Default\NTUSER.DAT"</Path>
-				</RunSynchronousCommand>
-				<RunSynchronousCommand wcm:action="add">
-					<Order>51</Order>
-					<Path>reg.exe add "HKU\DefaultUser\SOFTWARE\Microsoft\Windows\DWM" /v ColorPrevalence /t REG_DWORD /d 1 /f</Path>
-				</RunSynchronousCommand>
-				<RunSynchronousCommand wcm:action="add">
-					<Order>52</Order>
-					<Path>reg.exe add "HKU\DefaultUser\Software\Microsoft\Windows\CurrentVersion\RunOnce" /v "SetColorTheme" /t REG_SZ /d "powershell.exe -NoProfile -Command \"Get-Content -LiteralPath 'C:\Windows\Setup\Scripts\SetColorTheme.ps1' -Raw | Invoke-Expression;\"" /f</Path>
-				</RunSynchronousCommand>
-				<RunSynchronousCommand wcm:action="add">
-					<Order>53</Order>
-					<Path>reg.exe unload "HKU\DefaultUser"</Path>
+					<Path>cmd.exe /c "powershell.exe -NoProfile -Command "Get-Content -LiteralPath 'C:\Windows\Setup\Scripts\unattend-01.ps1' -Raw | Invoke-Expression;" &gt;&gt;"C:\Windows\Setup\Scripts\unattend-01.log" 2&gt;&amp;1"</Path>
 				</RunSynchronousCommand>
 			</RunSynchronous>
 		</component>
@@ -465,25 +453,30 @@ Set-ItemProperty -LiteralPath $key -Name 'ConfigureStartPins' -Value $json -Type
 	&lt;/DefaultLayoutOverride&gt;
 &lt;/LayoutModificationTemplate&gt;
 		</File>
-		<File path="C:\Windows\Setup\Scripts\SetColorTheme.ps1">
-$lightThemeSystem = 0;
-$lightThemeApps = 0;
-$accentColorOnStart = 1;
-$enableTransparency = 1;
-$params = @{
-	LiteralPath = 'Registry::HKCU\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize';
-	Force = $true;
-	Type = 'DWord';
-};
-Set-ItemProperty @params -Name 'SystemUsesLightTheme' -Value $lightThemeSystem;
-Set-ItemProperty @params -Name 'AppsUseLightTheme' -Value $lightThemeApps;
-Set-ItemProperty @params -Name 'ColorPrevalence' -Value $accentColorOnStart;
-Set-ItemProperty @params -Name 'EnableTransparency' -Value $enableTransparency;
-			
-Start-Sleep -Seconds 10;
-Get-Process -Name 'explorer' -ErrorAction 'SilentlyContinue' | Where-Object -FilterScript {
-	$_.SI -eq ( Get-Process -Id $PID ).SI;
-} | Stop-Process -Force;
+		<File path="C:\Windows\Setup\Scripts\unattend-01.ps1">
+# Create WinUtil shortcut on the desktop (sourced from CTT MicroWin)
+  $desktopPath = "C:\Users\Default\Desktop"
+  # Specify the target PowerShell command
+  $command = "powershell.exe -NoProfile -ExecutionPolicy Bypass -Command 'irm https://christitus.com/win | iex'"
+  # Specify the path for the shortcut
+  $shortcutPath = Join-Path $desktopPath 'LAUNCH-CTT-WINUTIL.lnk'
+  # Create a shell object
+  $shell = New-Object -ComObject WScript.Shell
+        
+  # Create a shortcut object
+  $shortcut = $shell.CreateShortcut($shortcutPath)
+           
+  # Set properties of the shortcut
+  $shortcut.TargetPath = "powershell.exe"
+  $shortcut.Arguments = "-NoProfile -ExecutionPolicy Bypass -Command `"$command`""
+  # Save the shortcut
+  $shortcut.Save()
+        
+  # Make the shortcut have 'Run as administrator' property on
+  $bytes = [System.IO.File]::ReadAllBytes($shortcutPath)
+  # Set byte value at position 0x15 in hex, or 21 in decimal, from the value 0x00 to 0x20 in hex
+  $bytes[0x15] = $bytes[0x15] -bor 0x20
+  [System.IO.File]::WriteAllBytes($shortcutPath, $bytes)
 		</File>
 	</Extensions>
 </unattend>
