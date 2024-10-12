@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <unattend xmlns="urn:schemas-microsoft-com:unattend" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State">
-	<!--https://schneegans.de/windows/unattend-generator/?LanguageMode=Unattended&UILanguage=en-US&Locale=en-US&Keyboard=00000409&GeoLocation=244&ProcessorArchitecture=amd64&ComputerNameMode=Custom&ComputerName=trantor&CompactOsMode=Default&TimeZoneMode=Explicit&TimeZone=Central+Standard+Time&PartitionMode=Interactive&WindowsEditionMode=Unattended&WindowsEdition=pro&UserAccountMode=Interactive&PasswordExpirationMode=Unlimited&LockoutMode=Default&HideFiles=HiddenSystem&TaskbarSearch=Hide&ShowFileExtensions=true&DisableWidgets=true&DeleteTaskbarIcons=true&DisableAppSuggestions=true&HideEdgeFre=true&MakeEdgeUninstallable=true&WifiMode=Skip&ExpressSettings=DisableAll&KeysMode=Skip&ColorMode=Custom&SystemColorTheme=Dark&AppsColorTheme=Dark&AccentColorOnStart=true&AccentColorOnBorders=true&EnableTransparency=true&WallpaperMode=Default&RemoveBingSearch=true&RemoveCamera=true&RemoveClipchamp=true&RemoveCopilot=true&RemoveCortana=true&RemoveInternetExplorer=true&RemoveMailCalendar=true&RemoveNews=true&RemoveOffice365=true&RemoveOneDrive=true&RemoveOneNote=true&RemoveOutlook=true&RemoveRecall=true&RemoveSkype=true&RemoveSolitaire=true&RemoveStickyNotes=true&RemoveTeams=true&RemoveGetStarted=true&RemoveToDo=true&RemoveYourPhone=true&StartTilesMode=Default&StartPinsMode=Empty&WdacMode=Skip-->
+	<!--https://schneegans.de/windows/unattend-generator/?LanguageMode=Unattended&UILanguage=en-US&Locale=en-US&Keyboard=00000409&GeoLocation=244&ProcessorArchitecture=amd64&ComputerNameMode=Custom&ComputerName=trantor&CompactOsMode=Default&TimeZoneMode=Explicit&TimeZone=Central+Standard+Time&PartitionMode=Interactive&WindowsEditionMode=Unattended&WindowsEdition=pro&UserAccountMode=Interactive&PasswordExpirationMode=Unlimited&LockoutMode=Default&HideFiles=HiddenSystem&TaskbarSearch=Hide&ShowFileExtensions=true&DisableWidgets=true&DeleteTaskbarIcons=true&DisableAppSuggestions=true&HideEdgeFre=true&MakeEdgeUninstallable=true&WifiMode=Skip&ExpressSettings=DisableAll&KeysMode=Skip&ColorMode=Custom&SystemColorTheme=Dark&AppsColorTheme=Dark&AccentColorOnStart=true&AccentColorOnBorders=true&EnableTransparency=true&WallpaperMode=Default&RemoveBingSearch=true&RemoveCamera=true&RemoveClipchamp=true&RemoveCopilot=true&RemoveCortana=true&RemoveInternetExplorer=true&RemoveMailCalendar=true&RemoveNews=true&RemoveOffice365=true&RemoveOneDrive=true&RemoveOneNote=true&RemoveOutlook=true&RemoveRecall=true&RemoveSkype=true&RemoveSolitaire=true&RemoveStickyNotes=true&RemoveTeams=true&RemoveGetStarted=true&RemoveToDo=true&RemoveYourPhone=true&StartTilesMode=Empty&StartPinsMode=Empty&WdacMode=Skip-->
 	<settings pass="offlineServicing"></settings>
 	<settings pass="windowsPE">
 		<component name="Microsoft-Windows-International-Core-WinPE" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
@@ -454,6 +454,16 @@ if( [System.Environment]::OSVersion.Version.Build -lt 20000 ) {
 $key = 'Registry::HKLM\SOFTWARE\Microsoft\PolicyManager\current\device\Start';
 New-Item -Path $key -ItemType 'Directory' -ErrorAction 'SilentlyContinue';
 Set-ItemProperty -LiteralPath $key -Name 'ConfigureStartPins' -Value $json -Type 'String';
+		</File>
+		<File path="C:\Users\Default\AppData\Local\Microsoft\Windows\Shell\LayoutModification.xml">
+&lt;LayoutModificationTemplate Version="1" xmlns="http://schemas.microsoft.com/Start/2014/LayoutModification"&gt;
+	&lt;LayoutOptions StartTileGroupCellWidth="6" /&gt;
+	&lt;DefaultLayoutOverride&gt;
+		&lt;StartLayoutCollection&gt;
+			&lt;StartLayout GroupCellWidth="6" xmlns="http://schemas.microsoft.com/Start/2014/FullDefaultLayout" /&gt;
+		&lt;/StartLayoutCollection&gt;
+	&lt;/DefaultLayoutOverride&gt;
+&lt;/LayoutModificationTemplate&gt;
 		</File>
 		<File path="C:\Windows\Setup\Scripts\SetColorTheme.ps1">
 $lightThemeSystem = 0;
